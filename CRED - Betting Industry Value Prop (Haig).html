@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CRED × Betting — Value Proposition (Internal)</title>
+<style>
+  :root{
+    --bg:#0a0e14;--panel:#121826;--panel2:#161d2c;--line:#222c3d;--line2:#2c3850;
+    --txt:#e7edf6;--txt2:#9fb0c6;--txt3:#6b7c93;
+    --accent:#37d6a7;--blue:#4ea1ff;--gold:#e8b54a;--violet:#9b7bff;--red:#ff6b6b;
+    --radius:16px;--maxw:1040px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  h1,h2,h3,h4{margin:0;letter-spacing:-0.01em;line-height:1.18}
+  p{margin:0}
+  .accent{color:var(--accent)} .blue{color:var(--blue)}
+  .topbar{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(10,14,20,.85);backdrop-filter:blur(8px);z-index:10}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.05em;font-size:13.5px}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  .tag{font-size:11px;color:var(--txt3);letter-spacing:.04em}
+
+  .hero{padding:54px 0 30px;background:radial-gradient(820px 380px at 82% -10%,rgba(55,214,167,.10),transparent 60%),radial-gradient(640px 360px at 0 0,rgba(78,161,255,.08),transparent 55%)}
+  .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--txt3);font-weight:600}
+  .hero h1{font-size:39px;font-weight:750;margin:16px 0 16px;max-width:21ch}
+  .hero p{font-size:17px;color:var(--txt2);max-width:74ch}
+  .hero p b{color:var(--txt)}
+  .internal{display:inline-block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(232,181,74,.3);background:rgba(232,181,74,.07);padding:4px 10px;border-radius:999px;font-weight:700;margin-bottom:14px}
+
+  section{padding:34px 0;border-top:1px solid var(--line)}
+  .sec-tag{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(55,214,167,.3);background:rgba(55,214,167,.06);padding:5px 11px;border-radius:999px;font-weight:600}
+  .sec-tag.amber{color:var(--gold);border-color:rgba(232,181,74,.32);background:rgba(232,181,74,.07)}
+  .sec-h{font-size:25px;font-weight:720;margin-bottom:10px;max-width:28ch}
+  .sec-sub{color:var(--txt2);font-size:15px;max-width:74ch;margin-bottom:20px}
+  .pill{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;color:var(--txt2);border:1px solid var(--line2);background:var(--panel);padding:5px 11px;border-radius:999px}
+  .pill .pd{width:6px;height:6px;border-radius:50%}
+  .pill.live .pd{background:var(--accent)} .pill.dev .pd{background:var(--gold)}
+
+  .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:stretch;margin:6px 0 20px}
+  .step{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 16px;position:relative;overflow:hidden}
+  .step::before{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,var(--accent),transparent)}
+  .step .k{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);font-weight:700}
+  .step h4{font-size:15px;margin:9px 0 6px}
+  .step p{font-size:12.5px;color:var(--txt2)}
+  .arrow{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:20px;font-weight:700}
+
+  .callout{background:linear-gradient(135deg,rgba(55,214,167,.09),rgba(78,161,255,.06));border:1px solid var(--line2);border-radius:14px;padding:18px 20px}
+  .callout .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:6px}
+  .callout p{font-size:14.5px;color:var(--txt)}
+  .callout p b{color:var(--accent)}
+
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-top:18px}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;position:relative}
+  .q .mark{font-size:32px;line-height:0;color:var(--line2);position:absolute;top:18px;right:16px;font-weight:800}
+  .q blockquote{margin:0 0 12px;font-size:13.8px;color:var(--txt);font-style:italic}
+  .q .who{display:flex;align-items:center;gap:10px}
+  .q .av{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:var(--bg);background:linear-gradient(135deg,var(--accent),var(--blue))}
+  .q .nm{font-size:13px;font-weight:650}
+  .q .ro{font-size:11px;color:var(--txt3)}
+
+  /* rights intelligence dashboard */
+  .proto-label{font-size:13px;font-weight:700;color:var(--txt);margin:22px 0 4px}
+  .proto-sub{font-size:12.5px;color:var(--txt3);margin-bottom:12px}
+  .ri{background:#0c1420;border:1px solid var(--line2);border-radius:16px;padding:20px;overflow-x:auto}
+  .ri-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:12px;flex-wrap:wrap}
+  .ri-title{color:var(--accent);font-weight:700;font-size:15px}
+  .ri-meta{font-size:11.5px;color:var(--txt3);font-family:ui-monospace,Menlo,monospace}
+  .ri-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+  .ri-stat{background:#101a28;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .ri-stat .n{font-size:26px;font-weight:760}
+  .ri-stat .l{font-size:11px;color:var(--txt3);margin-top:4px}
+  table.ri-tbl{width:100%;border-collapse:collapse;font-size:12px;min-width:760px}
+  .ri-tbl th{text-align:left;color:var(--txt3);font-weight:600;font-size:11px;letter-spacing:.03em;padding:10px 10px;border-bottom:1px solid var(--line2)}
+  .ri-tbl td{padding:11px 10px;border-bottom:1px solid #182232;color:var(--txt)}
+  .ri-tbl tr:nth-child(even) td{background:#0f1827}
+  .ri-tbl .dim{color:var(--txt3)}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:7px}
+  .b-green{color:#9be9cd;background:rgba(55,214,167,.12);border:1px solid rgba(55,214,167,.35)}
+  .b-amber{color:#f3d488;background:rgba(232,181,74,.13);border:1px solid rgba(232,181,74,.4)}
+  .b-dash{color:var(--txt3);background:#141d2b;border:1px solid var(--line2)}
+  .b-q{color:#f3d488;background:rgba(232,181,74,.10);border:1px solid rgba(232,181,74,.35)}
+  .val{color:var(--gold);font-weight:600} .ngr{color:var(--gold)} .gap{color:var(--red);font-weight:700}
+  .ri-foot{font-size:11px;color:var(--txt3);font-style:italic;margin-top:14px}
+
+  /* chat agent */
+  .chat{display:grid;grid-template-columns:230px 1fr;gap:0;background:#0c1420;border:1px solid var(--line2);border-radius:16px;overflow:hidden}
+  .chat-side{background:#0a121e;border-right:1px solid var(--line2);padding:18px 16px}
+  .chat-side .h{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt3);font-weight:700;margin-bottom:12px}
+  .qbtn{display:block;width:100%;text-align:left;font-size:12.5px;color:var(--txt2);background:transparent;border:none;border-radius:8px;padding:9px 10px;margin-bottom:4px;cursor:pointer;line-height:1.35}
+  .qbtn:hover{background:#121d2c;color:var(--txt)}
+  .qbtn.active{background:rgba(55,214,167,.10);color:var(--accent)}
+  .chat-main{padding:20px;display:flex;flex-direction:column;gap:14px;min-height:340px}
+  .bubble{max-width:82%;align-self:flex-end;background:var(--accent);color:#06281e;font-size:13.5px;font-weight:500;padding:12px 16px;border-radius:14px 14px 4px 14px}
+  .resp{display:flex;gap:10px;align-self:flex-start;max-width:94%}
+  .resp .cr{width:30px;height:30px;flex:none;border-radius:50%;background:rgba(55,214,167,.15);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;border:1px solid rgba(55,214,167,.4)}
+  .resp-card{background:#0f1827;border:1px solid var(--line2);border-radius:12px;padding:16px}
+  .resp-card .rh{color:var(--accent);font-weight:700;font-size:11.5px;letter-spacing:.08em;margin-bottom:12px}
+  table.cmp{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:12px}
+  .cmp th{text-align:left;color:var(--txt3);font-weight:600;font-size:11px;padding:7px 8px;border-bottom:1px solid var(--line2)}
+  .cmp td{padding:8px 8px;border-bottom:1px solid #182232}
+  .cmp tr:nth-child(even) td{background:#0c1420}
+  .cmp .g{color:var(--accent)} .cmp .o{color:var(--gold)}
+  .insight{background:rgba(55,214,167,.06);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 14px;font-size:13px;color:var(--txt)}
+  .insight b{color:var(--accent)}
+  .chat-input{display:flex;gap:10px;border-top:1px solid var(--line2);padding:14px 20px;background:#0a121e}
+  .chat-input input{flex:1;background:#101a28;border:1px solid var(--line2);border-radius:10px;padding:11px 14px;color:var(--txt);font-size:13px}
+  .chat-input .ask{background:var(--accent);color:#06281e;font-weight:700;border:none;border-radius:10px;padding:0 22px;font-size:13.5px;cursor:pointer}
+  .chat-foot{font-size:11px;color:var(--txt3);font-style:italic;margin-top:12px}
+
+  .price{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px}
+  .pcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .pcard .h{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .pcard .big{font-size:29px;font-weight:760;letter-spacing:-.02em}
+  .pcard .big.amber{color:var(--gold)} .pcard .big.green{color:var(--accent)}
+  .pcard .sub{font-size:12.5px;color:var(--txt2);margin-top:8px}
+  .pcard .cite{font-size:11.5px;color:var(--txt3);margin-top:10px;padding-top:10px;border-top:1px dashed var(--line2)}
+
+  footer{padding:30px 0 56px;border-top:1px solid var(--line);color:var(--txt3);font-size:12px}
+  footer b{color:var(--txt2)}
+  .disc{font-size:11px;margin-top:8px;line-height:1.6}
+
+  @media(max-width:820px){
+    .hero h1{font-size:29px}
+    .flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}
+    .ri-stats{grid-template-columns:repeat(2,1fr)}
+    .chat{grid-template-columns:1fr}.chat-side{border-right:none;border-bottom:1px solid var(--line2)}
+    .price{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <div class="brand"><span class="dot"></span>CRED &nbsp;·&nbsp; BETTING INDUSTRY</div>
+  <div class="tag">Internal briefing · for Haig Bedros · June 2026</div>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="internal">Internal · for Haig Bedros</span>
+  <div class="eyebrow">CRED's value proposition to the betting industry</div>
+  <h1>Two ways CRED moves the needle for operators.</h1>
+  <p>Both come back to the same edge: <b>external context on the people operators already hold.</b> One is live today — enriching first-party data to reveal who their bettors really are. One is in build — mapping the sports-rights market so buyers stop overpaying. Below is each, with what operators told us directly in discovery.</p>
+</div></header>
+
+<!-- PILLAR 1 -->
+<section><div class="wrap">
+  <span class="sec-tag">Pillar 1 · Live today</span>
+  <span class="pill live" style="margin-left:8px"><span class="pd"></span>In market — testing with operators now</span>
+  <h2 class="sec-h" style="margin-top:14px">Enrich first-party data → understand every bettor</h2>
+  <p class="sec-sub">Operators know a customer as a name and an email. They don't know what they earn, where they work, or what they actually follow. CRED matches their first-party list against 900M individual profiles and hands back income, affluence and sport-affinity context — so they target the players worth targeting and get ahead of affordability regulation.</p>
+
+  <div class="flow">
+    <div class="step"><div class="k">They share</div><h4>First-party data</h4><p>Whatever they hold — the more shared, the higher the match rate.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="k">CRED matches</div><h4>Profile every individual</h4><p>Predicted income, employer, affluence, sport interests &amp; affinity.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="k">They receive</div><h4>Segmented intelligence</h4><p>Returned enriched &amp; GDPR-clean — ready for CRM and affordability work.</p></div>
+  </div>
+
+  <div class="callout">
+    <div class="lab">The honest part — and where the value really sits</div>
+    <p>A CVM model on top of this <b>isn't proprietary</b> — a sophisticated operator can build their own (and the big ones already have). We can hand them a plug-and-play one to get started, but that's the packaging. <b>The value is the external context</b> on their punters — the part no operator can generate from their own four walls.</p>
+  </div>
+
+  <div class="quotes">
+    <div class="q"><div class="mark">“</div>
+      <blockquote>“To be honest, I'm really impressed. Some of our players earn minimum wage, others five times that — and we target them the same way.”</blockquote>
+      <div class="who"><div class="av">AS</div><div><div class="nm">Aleksandar Syarov</div><div class="ro">Sportsbook · PalmsBet (Bulgaria) · 27 May</div></div></div>
+    </div>
+    <div class="q"><div class="mark">“</div>
+      <blockquote>“We don't know a lot — especially salaries. We're not even allowed to know it ourselves. If we could model who earns more, we'd push all our CRM toward those players.”</blockquote>
+      <div class="who"><div class="av">MN</div><div><div class="nm">Marko Niketić</div><div class="ro">Head of Sport · MaxBet / Superbet · 22 May</div></div></div>
+    </div>
+    <div class="q"><div class="mark">“</div>
+      <blockquote>“Fed into an existing CVM model, external validators would make it exponentially better.” — agreed a 50K-record test to wealth-segment a recurring monthly list.</blockquote>
+      <div class="who"><div class="av">AH</div><div><div class="nm">Alex Haig</div><div class="ro">sportsbet.io · 2 Jun</div></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- PILLAR 2 -->
+<section><div class="wrap">
+  <span class="sec-tag amber">Pillar 2 · In build</span>
+  <span class="pill dev" style="margin-left:8px"><span class="pd"></span>Team building it now</span>
+  <h2 class="sec-h" style="margin-top:14px">Map the entire sports-rights market</h2>
+  <p class="sec-sub">No single place shows who owns which data and streaming rights, what they cost, and when they expire — so operators end up paying for the same content two or three times. CRED is mapping it globally: owner, deal value, expiry and NGR by competition. Two views below from the working prototype.</p>
+
+  <!-- VIEW 1 -->
+  <div class="proto-label">View 1 — Dashboard</div>
+  <div class="proto-sub">The rights landscape at a glance — filterable by competition, supplier, market, tier and expiry window. Gaps and clusters shown visually.</div>
+  <div class="ri">
+    <div class="ri-head">
+      <div class="ri-title">CRED Rights Intelligence</div>
+      <div class="ri-meta">Betting rights · 20 competitions mapped · Last updated today</div>
+    </div>
+    <div class="ri-stats">
+      <div class="ri-stat"><div class="n">20</div><div class="l">Competitions mapped</div></div>
+      <div class="ri-stat"><div class="n accent">14</div><div class="l">Agency identified</div></div>
+      <div class="ri-stat"><div class="n accent">17</div><div class="l">Supplier identified</div></div>
+      <div class="ri-stat"><div class="n" style="color:var(--gold)">3</div><div class="l">Gaps — data needed</div></div>
+    </div>
+    <table class="ri-tbl">
+      <thead><tr><th>Competition</th><th>Country</th><th>Tier</th><th>Agency</th><th>Betting data rights</th><th>Betting live streaming</th><th>Deal value</th><th>Expiry</th><th>NGR est.</th></tr></thead>
+      <tbody>
+        <tr><td>Ligue 1</td><td>France</td><td>T1</td><td><span class="badge b-green">Infront</span></td><td>Genius Sports</td><td>Infront</td><td class="val">€18–24M</td><td><span class="badge b-amber">Jun 2029</span></td><td class="ngr">€240M</td></tr>
+        <tr><td class="dim">Serie A</td><td class="dim">Italy</td><td class="dim">T1</td><td><span class="badge b-green">IMG Arena</span></td><td class="dim">Stats Perform</td><td class="dim">Stats Perform</td><td class="val">€22–28M</td><td class="dim">Jun 2028</td><td class="ngr">€310M</td></tr>
+        <tr><td>Eredivisie</td><td>Netherlands</td><td>T1</td><td><span class="badge b-green">Genius</span></td><td>Genius Sports</td><td>Genius Sports</td><td class="val">€10–14M</td><td><span class="badge b-amber">May 2027</span></td><td class="ngr">€180M</td></tr>
+        <tr><td class="dim">Turkish Süper Lig</td><td class="dim">Turkey</td><td class="dim">T1</td><td><span class="badge b-green">Infront</span></td><td class="dim">Infront</td><td class="dim">Infront</td><td class="val">€15–20M</td><td class="dim">Jun 2029</td><td class="ngr">€210M</td></tr>
+        <tr><td>Scottish Premiership</td><td>Scotland</td><td>T1</td><td><span class="badge b-dash">—</span></td><td>Sportradar</td><td>Sportradar</td><td class="val">€4–7M</td><td><span class="badge b-amber">Jun 2027</span></td><td class="ngr">€90M</td></tr>
+        <tr><td class="dim">Slovak Super Liga</td><td class="dim">Slovakia</td><td class="dim">T2</td><td><span class="badge b-q">?</span></td><td class="gap">Gap</td><td class="gap">Gap</td><td class="gap">Gap</td><td class="dim">—</td><td class="ngr">€30M</td></tr>
+      </tbody>
+    </table>
+    <div class="ri-foot">Prototype view — illustrative data. Gaps shown in red are where data purchase or industry knowledge is required.</div>
+  </div>
+
+  <!-- VIEW 2 -->
+  <div class="proto-label" style="margin-top:26px">View 2 — Chat agent</div>
+  <div class="proto-sub">An agency or rights holder asks any question and gets a data-led answer instantly. No filtering, no spreadsheet — just ask.</div>
+  <div class="chat">
+    <div class="chat-side">
+      <div class="h">Example queries</div>
+      <button class="qbtn active" data-q="q1">What did comparable Tier 1 leagues sell for?</button>
+      <button class="qbtn" data-q="q2">Is our deal undervalued vs NGR?</button>
+      <button class="qbtn" data-q="q3">Which supplier should we approach?</button>
+      <button class="qbtn" data-q="q4">When should we go to tender?</button>
+      <button class="qbtn" data-q="q5">What can we resell these rights for?</button>
+    </div>
+    <div class="chat-main">
+      <div class="bubble" id="userBubble">What did comparable Tier 1 Western European leagues sell for? We're advising a rights holder on their renewal.</div>
+      <div class="resp"><div class="cr">CR</div>
+        <div class="resp-card" id="respCard">
+          <div class="rh">DEAL COMPARABLES · TIER 1 WESTERN EUROPE</div>
+          <table class="cmp">
+            <thead><tr><th>Competition</th><th>Supplier</th><th>Est. value/yr</th><th>NGR</th></tr></thead>
+            <tbody>
+              <tr><td>Serie A</td><td>Stats Perform</td><td class="g">€22–28M</td><td class="o">€310M</td></tr>
+              <tr><td class="dim">Ligue 1</td><td class="dim">Genius / Infront</td><td class="g">€18–24M</td><td class="o">€240M</td></tr>
+              <tr><td>Eredivisie</td><td>Genius</td><td class="g">€10–14M</td><td class="o">€180M</td></tr>
+            </tbody>
+          </table>
+          <div class="insight"><b>Pattern:</b> Tier 1 deals average 7–9% of NGR. If your client generates €200M NGR, the floor value is €14–18M/yr for a combined betting data rights and betting live streaming deal.</div>
+        </div>
+      </div>
+    </div>
+    <div class="chat-input" style="grid-column:1/-1">
+      <input type="text" placeholder="Ask about rights deals, NGR benchmarks, supplier budgets…" />
+      <button class="ask">Ask</button>
+    </div>
+  </div>
+  <div class="chat-foot">Interactive prototype — click queries in the sidebar to see example responses. In the live product these pull from the full mapped rights database.</div>
+
+  <div style="height:16px"></div>
+  <div class="callout" style="border-color:rgba(232,181,74,.3);background:linear-gradient(135deg,rgba(232,181,74,.08),rgba(232,181,74,.03))">
+    <div class="lab" style="color:var(--gold)">One caution operators flagged</div>
+    <p style="color:var(--txt)">Predicted <b style="color:var(--gold)">NGR per right</b> is the hard part — "there's no proof Serie A earns you X." Lead with ownership &amp; expiry (the defensible facts); treat NGR estimates as a guided add-on, not a promise.</p>
+  </div>
+</div></section>
+
+<!-- PRICING SIGNAL -->
+<section><div class="wrap">
+  <span class="sec-tag">What the market told us it's worth</span>
+  <h2 class="sec-h" style="margin-top:6px">Pricing signal — straight from operators</h2>
+  <div class="price">
+    <div class="pcard">
+      <div class="h"><span class="dot" style="background:var(--gold);box-shadow:none"></span>Rights mapping</div>
+      <div class="big amber">€5–10k <span style="font-size:15px;color:var(--txt3)">/ month</span></div>
+      <div class="sub">Quoted independently by both MaxBet and PalmsBet for multi-provider operators — "easily," against savings in the hundreds of thousands. Tier-1 operators ("the monsters") would pay more.</div>
+      <div class="cite">Nuance from PalmsBet: smaller books won't sign a 2-year deal — they'll pay for short, intense access during a 4–6 week supplier-decision window. Build year-round value for the big buyers.</div>
+    </div>
+    <div class="pcard">
+      <div class="h"><span class="dot" style="background:var(--accent);box-shadow:none"></span>Data enrichment</div>
+      <div class="big green">Per match</div>
+      <div class="sub">Price on volume of records matched, not a flat fee — depth-tiered (income band cheap; full profile + sport affinity premium). Recurring feeds (e.g. sportsbet.io's 500K/month) move to committed-volume subscription.</div>
+      <div class="cite">Reference point: enrichment engagements like Aston Martin (~£20k) anchor the data-side value; every operator wants a free sample test first.</div>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Prepared by <b>Mark Loughrey</b>, CRED · internal briefing for <b>Haig Bedros</b>.</p>
+  <p class="disc">Market quotes from CRED discovery calls — PalmsBet (27 May), MaxBet (22 May), sportsbet.io / Alex Haig (2 Jun 2026), lightly tidied for readability. Pricing figures are operator-stated willingness-to-pay, not list prices. Rights-intelligence views are an early prototype with illustrative data. Data enrichment runs GDPR-compliant with no PII retained by CRED.</p>
+</div></footer>
+
+<script>
+  const ANS = {
+    q1: `<div class="rh">DEAL COMPARABLES · TIER 1 WESTERN EUROPE</div>
+      <table class="cmp"><thead><tr><th>Competition</th><th>Supplier</th><th>Est. value/yr</th><th>NGR</th></tr></thead><tbody>
+      <tr><td>Serie A</td><td>Stats Perform</td><td class="g">€22–28M</td><td class="o">€310M</td></tr>
+      <tr><td class="dim">Ligue 1</td><td class="dim">Genius / Infront</td><td class="g">€18–24M</td><td class="o">€240M</td></tr>
+      <tr><td>Eredivisie</td><td>Genius</td><td class="g">€10–14M</td><td class="o">€180M</td></tr></tbody></table>
+      <div class="insight"><b>Pattern:</b> Tier 1 deals average 7–9% of NGR. If your client generates €200M NGR, the floor value is €14–18M/yr for a combined betting data rights and betting live streaming deal.</div>`,
+    q2: `<div class="rh">VALUATION CHECK · YOUR DEAL vs NGR</div>
+      <div class="insight"><b>Read:</b> At €12M/yr on €210M NGR you're paying ~5.7% — below the 7–9% Tier 1 band. Either you've secured a strong deal or the package is missing live-streaming scope. Audit what's included before you renew.</div>`,
+    q3: `<div class="rh">SUPPLIER ROUTING</div>
+      <div class="insight"><b>Recommendation:</b> Genius Sports and Stats Perform hold the most Tier 1 Western European inventory; Infront is strongest on streaming. For an Eredivisie-type package, Genius offers combined data + streaming — fewer vendors, lower total cost.</div>`,
+    q4: `<div class="rh">TENDER TIMING</div>
+      <div class="insight"><b>Window:</b> Three Tier 1 deals in your set expire within 24 months — Eredivisie (May 2027), Scottish Premiership (Jun 2027), Serie A (Jun 2028). Launch tenders 9–12 months out, so Q3 2026 for the 2027 expiries, while budget is liquid.</div>`,
+    q5: `<div class="rh">RESALE / SUB-LICENSING</div>
+      <div class="insight"><b>Estimate:</b> Combined betting data + streaming for a €200M-NGR league floors at €14–18M/yr (7–9% of NGR). Sub-licensing to regional operators can add 15–25% where territory carve-outs exist.</div>`
+  };
+  const QTEXT = {
+    q1:"What did comparable Tier 1 Western European leagues sell for? We're advising a rights holder on their renewal.",
+    q2:"Is our deal undervalued versus the NGR it generates?",
+    q3:"Which supplier should we approach for our renewal?",
+    q4:"When should we go to tender on our expiring rights?",
+    q5:"What could we realistically resell these rights for?"
+  };
+  document.querySelectorAll('.qbtn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.qbtn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      const q=b.dataset.q;
+      document.getElementById('userBubble').textContent=QTEXT[q];
+      document.getElementById('respCard').innerHTML=ANS[q];
+    });
+  });
+</script>
+</body>
+</html>
